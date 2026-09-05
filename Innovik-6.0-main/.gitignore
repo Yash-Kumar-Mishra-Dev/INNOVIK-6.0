@@ -1,0 +1,29 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+
+# Virtual environments
+.venv/
+venv/
+ml_venv/
+
+# Secrets
+.env
+.env.*
+.cdsapirc
+*.key
+
+# Large datasets
+era5_data/
+imd_data/
+*.nc
+*.grib
+*.grib2
+
+# Logs
+*.log
+
+# IDE
+.vscode/
+.idea/

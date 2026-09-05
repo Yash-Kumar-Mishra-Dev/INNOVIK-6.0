@@ -1,0 +1,9 @@
+fastapi==0.110.0
+uvicorn==0.27.1
+pydantic==2.6.3
+python-dotenv==1.0.1
+# AI / ML / NLP specific dependencies
+rasa==3.6.20
+# Or alternatively, if using LLM API + Langchain:
+# langchain==0.1.13
+# openai==1.14.2

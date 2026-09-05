@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en" class="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RakshaSetu — Fullscreen GIS Spatial Inundation Map</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: { extend: { fontFamily: { sans: ['"Plus Jakarta Sans"', 'sans-serif'], mono: ['"JetBrains Mono"', 'monospace'] } } }
+    }
+  </script>
+</head>
+<body class="bg-slate-50 dark:bg-[#060b18] text-slate-900 dark:text-slate-100 font-sans min-h-screen flex flex-col antialiased selection:bg-blue-600 selection:text-white transition-colors duration-300">
+
+  <!-- BHUVAN TRICOLOR STRIPE -->
+  <div class="bg-gradient-to-r from-[#ff9933] via-white to-[#138808] h-1.5 w-full"></div>
+
+  <!-- HEADER -->
+    <!-- UNIFIED CONNECTED NAV BAR -->
+    <!-- UNIFIED CONNECTED NAV BAR -->
+  <header class="bg-slate-950 text-white px-4 lg:px-8 py-3.5 shadow-lg border-b border-slate-800 sticky top-0 z-50">
+    <div class="max-w-[1720px] mx-auto flex items-center justify-between gap-4">
+      
+      <!-- Left: Hamburger (Opens Left Nav), Language, Home & Main Links -->
+      <div class="flex items-center gap-3">
+        <!-- 3-Line Hamburger to open Left Nav -->
+        <button onclick="RAKSHA_DRAWER.toggle()" class="p-2 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-200 border border-slate-700 transition flex items-center justify-center shadow-sm" title="Toggle Navigation Menu">
+          <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="3" y1="6" x2="21" y2="6"/>
+            <line x1="3" y1="12" x2="21" y2="12"/>
+            <line x1="3" y1="18" x2="21" y2="18"/>
+          </svg>
+        </button>
+
+        <!-- Bilingual Switcher: English and हिन्दी Only -->
+        <div class="flex items-center gap-1 bg-slate-900 p-0.5 rounded-lg border border-slate-800 text-xs font-bold">
+          <button onclick="setLanguage('en')" id="lang-btn-en" class="px-2 py-0.5 rounded bg-blue-600 text-white transition">EN</button>
+          <button onclick="setLanguage('hi')" id="lang-btn-hi" class="px-2 py-0.5 rounded text-slate-400 hover:text-white transition">हिन्दी</button>
+        </div>
+
+        <!-- Main Nav Links -->
+        <nav class="hidden lg:flex items-center gap-1 text-xs font-semibold">
+          <a href="index.html" class="px-3 py-1.5 rounded-lg text-slate-300 hover:text-white hover:bg-slate-900 transition flex items-center gap-1.5">
+            <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
+            <span data-i18n="nav_home">Home</span>
+          </a>
+          <a href="about.html" class="px-3 py-1.5 rounded-lg text-slate-300 hover:text-white hover:bg-slate-900 transition" data-i18n="nav_about">About</a>
+          <a href="contacts.html" class="px-3 py-1.5 rounded-lg text-slate-300 hover:text-white hover:bg-slate-900 transition" data-i18n="nav_contacts">Contacts</a>
+          <a href="safety-info.html" class="px-3 py-1.5 rounded-lg text-slate-300 hover:text-white hover:bg-slate-900 transition" data-i18n="nav_sops">SOPs</a>
+          <a href="radar.html" class="px-3 py-1.5 rounded-lg text-slate-300 hover:text-white hover:bg-slate-900 transition" data-i18n="nav_radar">Radar</a>
+          <a href="state-portals.html" class="px-3 py-1.5 rounded-lg text-slate-300 hover:text-white hover:bg-slate-900 transition" data-i18n="nav_portals">State Portals</a>
+          <a href="checklist.html" class="px-3 py-1.5 rounded-lg text-slate-300 hover:text-white hover:bg-slate-900 transition" data-i18n="nav_kit">72h Kit</a>
+        </nav>
+      </div>
+
+      <!-- Center: Logo & Official Caption -->
+      <a href="index.html" class="flex items-center gap-3 group text-center" title="RakshaSetu Gateway">
+        <img src="assets/images/rakshasetu-logo.jpg" alt="RakshaSetu Logo" class="w-10 h-10 rounded-2xl object-contain border border-slate-700 shadow-md group-hover:scale-105 transition-transform bg-slate-900 p-0.5" onerror="this.src='assets/images/rakshasetu-logo.svg'">
+        <div>
+          <div class="font-black text-lg tracking-tight text-white flex items-center justify-center gap-1.5">
+            Raksha<span class="text-blue-500">Setu</span>
+            <span class="text-[9px] px-1.5 py-0.2 rounded bg-blue-500/20 text-blue-300 font-mono font-bold border border-blue-500/30">GIS SPATIAL MAP</span>
+          </div>
+          <div class="text-[10px] font-bold text-slate-400 tracking-wide" data-i18n="tagline">Prepare. Respond. Protect. Together.</div>
+        </div>
+      </a>
+
+      <!-- Right: Theme, Back to Index, Logout to Login -->
+      <div class="flex items-center gap-2 text-xs">
+        <button onclick="toggleTheme()" class="p-2 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-300 border border-slate-800 transition" title="Toggle Light/Dark Theme">
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/></svg>
+        </button>
+
+        <!-- Back to Gateway -->
+        <a href="index.html" class="px-3 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 transition font-semibold flex items-center gap-1.5" title="Redirect to Gateway Index">
+          <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m15 18-6-6 6-6"/></svg>
+          <span data-i18n="nav_back">Back</span>
+        </a>
+
+        <!-- Logout to Login -->
+        <a href="login.html" class="px-3 py-1.5 rounded-xl bg-red-950/80 hover:bg-red-900 text-red-200 border border-red-800/60 transition font-bold flex items-center gap-1.5 shadow-sm" title="Sign Out & Return to Login Panel">
+          <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+          <span data-i18n="nav_logout">Logout</span>
+        </a>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- LEFT NAVIGATION DRAWER -->
+  <div id="raksha-left-drawer-backdrop" onclick="RAKSHA_DRAWER.close()" class="fixed inset-0 bg-slate-950/70 backdrop-blur-sm z-[9998] opacity-0 pointer-events-none transition-opacity duration-300"></div>
+  <aside id="raksha-left-drawer" class="fixed top-0 left-0 w-80 max-w-[85vw] h-full bg-slate-950 text-slate-200 border-r border-slate-800 shadow-2xl z-[9999] -translate-x-full transition-transform duration-300 flex flex-col">
+    <div class="p-4 border-b border-slate-800 flex items-center justify-between bg-slate-900/60">
+      <div class="flex items-center gap-2.5">
+        <img src="assets/images/rakshasetu-logo.jpg" alt="Logo" class="w-8 h-8 rounded-xl object-contain border border-slate-700 bg-slate-900">
+        <div>
+          <div class="font-black text-sm text-white">Government Command Center</div>
+          <div class="text-[10px] text-slate-400 font-mono">J. Das, IAS • State Relief Commissioner</div>
+        </div>
+      </div>
+      <button onclick="RAKSHA_DRAWER.close()" class="p-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-400 hover:text-white transition" title="Close Drawer">
+        <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div class="p-4 flex-1 overflow-y-auto space-y-1 text-xs">
+      <div class="pb-2 text-[10px] uppercase font-bold text-slate-500 font-mono tracking-wider">Navigation Menu</div>
+      <a href="government.html" class="flex items-center gap-3 px-3 py-2 rounded-xl hover:bg-slate-900 text-slate-300 hover:text-white transition"><span>State Command Center Dashboard</span></a><a href="spatial-map.html" class="flex items-center gap-3 px-3 py-2 rounded-xl bg-blue-600 text-white font-bold shadow-md"><span>GIS Spatial Flood Inundation Map</span></a><a href="evacuation.html" class="flex items-center gap-3 px-3 py-2 rounded-xl hover:bg-slate-900 text-slate-300 hover:text-white transition"><span>Evacuation Corridors & Convoys</span></a><a href="infrastructure.html" class="flex items-center gap-3 px-3 py-2 rounded-xl hover:bg-slate-900 text-slate-300 hover:text-white transition"><span>Critical Infrastructure Grid</span></a><a href="departments.html" class="flex items-center gap-3 px-3 py-2 rounded-xl hover:bg-slate-900 text-slate-300 hover:text-white transition"><span>Inter-Agency Department Logistics</span></a><a href="treasury.html" class="flex items-center gap-3 px-3 py-2 rounded-xl hover:bg-slate-900 text-slate-300 hover:text-white transition"><span>Disaster Relief Treasury (SDRF/NDRF)</span></a><a href="cabinet-sitrep.html" class="flex items-center gap-3 px-3 py-2 rounded-xl hover:bg-slate-900 text-slate-300 hover:text-white transition"><span>Cabinet Secretariat SitRep Export</span></a><a href="directives.html" class="flex items-center gap-3 px-3 py-2 rounded-xl hover:bg-slate-900 text-slate-300 hover:text-white transition"><span>Executive Emergency Directives</span></a><a href="analytics.html" class="flex items-center gap-3 px-3 py-2 rounded-xl hover:bg-slate-900 text-slate-300 hover:text-white transition"><span>Disaster Analytics & Trends</span></a><a href="ai-predictions.html" class="flex items-center gap-3 px-3 py-2 rounded-xl hover:bg-slate-900 text-slate-300 hover:text-white transition"><span>AI Flood Anomaly Predictions</span></a>
+    </div>
+  </aside>
+
+
+
+  <div class="flex-1 flex flex-col md:flex-row min-h-0 max-w-[1720px] mx-auto w-full">
+    <!-- LEFT SIDEBAR -->
+    <aside class="w-full md:w-60 bg-slate-950 text-slate-300 flex flex-col flex-shrink-0 border-r border-slate-800/80 p-3 space-y-1 text-xs font-medium">
+      <div class="pb-3 mb-2 border-b border-slate-800 font-bold text-white text-xs">SPATIAL CONTROLS</div>
+      <a href="government.html" class="flex items-center gap-2.5 px-3 py-2 rounded-xl hover:bg-slate-900 transition"><span>Dashboard</span></a>
+      <a href="spatial-map.html" class="flex items-center gap-2.5 px-3 py-2 rounded-xl bg-cyan-600 text-white font-bold transition"><span>GIS Spatial Map</span></a>
+      <a href="incidents.html" class="flex items-center gap-2.5 px-3 py-2 rounded-xl hover:bg-slate-900 transition"><span>Incidents Registry</span></a>
+      <a href="evacuation.html" class="flex items-center gap-2.5 px-3 py-2 rounded-xl hover:bg-slate-900 transition"><span>Evacuation Routes</span></a>
+      <a href="shelters.html" class="flex items-center gap-2.5 px-3 py-2 rounded-xl hover:bg-slate-900 transition"><span>Relief Shelters</span></a>
+      <a href="missions.html" class="flex items-center gap-2.5 px-3 py-2 rounded-xl hover:bg-slate-900 transition"><span>Rescue Missions</span></a>
+      </aside>
+
+    <!-- MAIN GIS MAP -->
+    <main class="flex-1 relative flex flex-col h-[calc(100vh-110px)]">
+      <div id="gis-map" class="w-full h-full"></div>
+
+      <!-- MAP CONTROLS OVERLAY -->
+        <div class="pt-2 border-t border-slate-800 space-y-1">
+          <label class="block text-[10px] uppercase font-bold text-slate-400">Pan-India 36 States Jump:</label>
+          <select id="spatial-state-select" onchange="onSpatialStateChange()" class="w-full px-2 py-1 rounded bg-slate-800 border border-slate-700 text-xs font-semibold text-white focus:outline-none">
+          </select>
+        </div>
+      <div class="absolute top-4 left-4 z-[1000] bg-slate-900/90 backdrop-blur-md text-white p-3 rounded-2xl border border-slate-700 shadow-2xl space-y-2 text-xs">
+        <div class="font-black tracking-tight text-white flex items-center gap-2">
+          <span class="w-2 h-2 rounded-full bg-cyan-400 animate-ping"></span>
+          <span>Brahmaputra Basin GIS Inundation</span>
+        </div>
+        <div class="text-[10px] text-slate-400 font-mono">Center: 26.2006° N, 92.9376° E</div>
+        <div class="pt-2 border-t border-slate-800 space-y-1">
+          <label class="flex items-center gap-2 cursor-pointer">
+            <input type="checkbox" id="layer-flood" checked class="accent-cyan-500">
+            <span>Satellite Flood Inundation Layer</span>
+          </label>
+          <label class="flex items-center gap-2 cursor-pointer">
+            <input type="checkbox" id="layer-shelters" checked class="accent-emerald-500">
+            <span>482 Active Relief Camps</span>
+          </label>
+          <label class="flex items-center gap-2 cursor-pointer">
+            <input type="checkbox" id="layer-incidents" checked class="accent-red-500">
+            <span>Critical Distress Clusters</span>
+          </label>
+        </div>
+      </div>
+
+      <!-- EXPLICIT ZOOM BUTTONS (User requested: Zoom in/out option in map) -->
+      <div class="absolute top-4 right-4 z-[1000] flex flex-col gap-2">
+        <button onclick="gisMap.zoomIn()" class="w-10 h-10 rounded-xl bg-slate-900/90 text-white font-black text-lg border border-slate-700 shadow-xl flex items-center justify-center hover:bg-slate-800 transition" title="Zoom In">+</button>
+        <button onclick="gisMap.zoomOut()" class="w-10 h-10 rounded-xl bg-slate-900/90 text-white font-black text-lg border border-slate-700 shadow-xl flex items-center justify-center hover:bg-slate-800 transition" title="Zoom Out">−</button>
+      </div>
+    </main>
+  </div>
+
+  <script>
+    lucide.createIcons();
+    function applySavedTheme() {
+      const theme = localStorage.getItem('rakshasetu_theme') || 'light';
+      document.documentElement.className = theme;
+    }
+    function toggleTheme() {
+      const current = document.documentElement.classList.contains('dark') ? 'light' : 'dark';
+      localStorage.setItem('rakshasetu_theme', current);
+      applySavedTheme();
+    }
+    applySavedTheme();
+
+    // Leaflet GIS Map Init
+    const gisMap = L.map('gis-map', { zoomControl: false }).setView([26.2006, 92.9376], 8);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; OpenStreetMap & ISRO Bhuvan'
+    }).addTo(gisMap);
+
+    // Flood Polygon Overlays
+    const floodArea = L.polygon([
+      [26.40, 92.50], [26.60, 93.10], [26.50, 93.60], [26.20, 93.40], [26.15, 92.70]
+    ], { color: '#06b6d4', fillColor: '#0891b2', fillOpacity: 0.45 }).addTo(gisMap).bindPopup('<b>Zone A Inundation:</b> Brahmaputra breach +2.1m depth');
+
+    // Shelter Markers
+    L.circleMarker([26.18, 91.75], { color: '#10b981', radius: 9, fillOpacity: 0.9 }).addTo(gisMap).bindPopup('<b>Relief Shelter #1:</b> Guwahati Sarusajai (Capacity: 89%)');
+    L.circleMarker([26.75, 94.22], { color: '#10b981', radius: 9, fillOpacity: 0.9 }).addTo(gisMap).bindPopup('<b>Relief Shelter #2:</b> Jorhat Stadium (Capacity: 76%)');
+
+    // Incident Markers
+    L.circleMarker([26.35, 92.68], { color: '#ef4444', radius: 10, fillOpacity: 0.9 }).addTo(gisMap).bindPopup('<b>SOS Incident:</b> 120 stranded on temple roof, Barpeta');
+  </script>
+  <!-- RakshaSetu Core Engines -->
+  <script src="js/i18n.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/nav.js"></script>
+  <script>
+    if (window.lucide) lucide.createIcons();
+    function applySavedTheme() {
+      const theme = localStorage.getItem('rakshasetu_theme') || 'light';
+      if (theme === 'dark') {
+        document.documentElement.classList.add('dark');
+        document.documentElement.classList.remove('light');
+      } else {
+        document.documentElement.classList.remove('dark');
+        document.documentElement.classList.add('light');
+      }
+    }
+    function toggleTheme() {
+      const isDark = document.documentElement.classList.contains('dark');
+      const newTheme = isDark ? 'light' : 'dark';
+      localStorage.setItem('rakshasetu_theme', newTheme);
+      applySavedTheme();
+    }
+    applySavedTheme();
+    if (window.RAKSHA_AUTH) {
+      RAKSHA_AUTH.applyNavbarSecurity('nav-auth-container');
+    }
+  </script>
+  <!-- RakshaSetu Core Engines -->
+  <script src="js/india-states.js"></script>
+  <script src="js/i18n.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/nav.js"></script>
+  <script>
+    if (window.lucide) lucide.createIcons();
+    function applySavedTheme() {
+      const theme = localStorage.getItem('rakshasetu_theme') || 'light';
+      document.documentElement.className = theme;
+    }
+    function toggleTheme() {
+      const current = document.documentElement.classList.contains('dark') ? 'light' : 'dark';
+      localStorage.setItem('rakshasetu_theme', current);
+      applySavedTheme();
+    }
+    applySavedTheme();
+  </script>
+</body>
+</html>

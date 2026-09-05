@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="en" class="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <!-- Primary SEO Meta Tags -->
+  <title>RakshaSetu — National Disaster Preparedness & Spatial Crisis Management Platform</title>
+  <meta name="title" content="RakshaSetu — National Disaster Preparedness & Spatial Crisis Management Platform">
+  <meta name="description" content="Official ISRO Bhuvan-integrated Geoportal & Emergency Response Platform for India. Unified apex command, government disaster monitoring, citizen 112 SOS, and tactical rescue fleet coordination.">
+  <meta name="keywords" content="RakshaSetu, Bhuvan Geoportal, Disaster Preparedness India, NDRF, SDRF, Flood Inundation Assam, 112 SOS, Mapbox GL JS, Keycloak RBAC">
+  <meta name="author" content="National Disaster Management Authority (NDMA) & ISRO Bhuvan">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://rakshasetu.gov.in/index.html">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://rakshasetu.gov.in/index.html">
+  <meta property="og:title" content="RakshaSetu — National Disaster Preparedness & Crisis Response Platform">
+  <meta property="og:description" content="Official Government of India emergency management system with real-time GIS spatial telemetry, 112 SOS, and multi-agency crisis coordination.">
+  <meta property="og:site_name" content="RakshaSetu National Geoportal">
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <!-- Typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace'],
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    .glass-card {
+      background: rgba(255, 255, 255, 0.94);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(226, 232, 240, 0.9);
+      box-shadow: 0 10px 30px -5px rgba(15, 23, 42, 0.06);
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .dark .glass-card {
+      background: rgba(15, 23, 42, 0.88);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(51, 65, 85, 0.7);
+      box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.5);
+    }
+    .glass-card:hover {
+      transform: translateY(-4px);
+    }
+  </style>
+</head>
+<body class="bg-slate-50 dark:bg-[#060b18] text-slate-900 dark:text-slate-100 font-sans min-h-screen flex flex-col antialiased selection:bg-blue-600 selection:text-white transition-colors duration-300">
+
+  <!-- BHUVAN INDIAN TRICOLOR HEADER STRIPE -->
+  <div class="bg-gradient-to-r from-[#ff9933] via-white to-[#138808] h-1.5 w-full"></div>
+
+  <!-- OFFICIAL TOP GOVERNMENT STRIPE (With Pan-India State Selector & English/Hindi Only) -->
+  <div class="bg-slate-900 text-slate-300 text-[11px] px-4 lg:px-8 py-2 border-b border-slate-800">
+    <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-2">
+      <div class="flex items-center gap-2.5">
+        <span class="font-bold text-white flex items-center gap-1.5">
+          <svg class="w-3.5 h-3.5 text-amber-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/></svg>
+          Government of India
+        </span>
+        <span class="text-slate-600">|</span>
+        <span>National Disaster Management Authority (NDMA)</span>
+        <span class="text-slate-600 hidden md:inline">|</span>
+        <span class="hidden md:inline text-blue-400 font-medium">ISRO Bhuvan Spatial Geoportal</span>
+      </div>
+
+      
+    </div>
+  </div>
+
+  <!-- EYE-CATCHY BROAD NAVIGATION BAR -->
+  <header class="bg-slate-950 text-white px-4 lg:px-8 py-3.5 shadow-lg border-b border-slate-800 sticky top-0 z-50">
+    <div class="max-w-[1720px] mx-auto flex items-center justify-between gap-4">
+      
+      <!-- Left: 3-Line Menu, Logo, RakshaSetu + Caption, and Main Nav Content -->
+      <div class="flex items-center gap-3">
+        
+        <!-- Logo & RakshaSetu Title with Caption Under It -->
+        <a href="index.html" class="flex items-center gap-3 group text-left" title="RakshaSetu Gateway">
+          <img src="assets/images/rakshasetu-logo.jpg" alt="RakshaSetu Logo" class="w-10 h-10 rounded-2xl object-contain border border-slate-700 shadow-md group-hover:scale-105 transition-transform bg-slate-900 p-0.5" onerror="this.src='logo.png'">
+          <div>
+            <div class="font-black text-lg tracking-tight text-white flex items-center gap-1.5">
+              Raksha<span class="text-blue-500">Setu</span>
+              
+            </div>
+            <div class="text-[10px] font-bold text-slate-400 tracking-wide" data-i18n="tagline">Prepare. Respond. Protect. Together.</div>
+          </div>
+        </a>
+
+        <!-- Main Nav Content Aligned on Left -->
+        <nav class="hidden lg:flex items-end gap-1 text-xs font-semibold ml-4 pl-4 border-l border-slate-800">
+          <a href="index.html" class="px-3 py-1.5 rounded-lg text-white bg-blue-600 font-bold flex items-center gap-1.5 shadow-sm">
+            <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
+            <span data-i18n="nav_home">Home</span>
+          </a>
+          <a href="about.html" class="px-3 py-1.5 rounded-lg text-slate-300 hover:text-white hover:bg-slate-900 transition" data-i18n="nav_about">About</a>
+          <a href="contacts.html" class="px-3 py-1.5 rounded-lg text-slate-300 hover:text-white hover:bg-slate-900 transition" data-i18n="nav_contacts">Contacts</a>
+          <a href="safety-info.html" class="px-3 py-1.5 rounded-lg text-slate-300 hover:text-white hover:bg-slate-900 transition" data-i18n="nav_sops">SOPs</a>
+          <a href="radar.html" class="px-3 py-1.5 rounded-lg text-slate-300 hover:text-white hover:bg-slate-900 transition" data-i18n="nav_radar">Radar</a>
+          <a href="state-portals.html" class="px-3 py-1.5 rounded-lg text-slate-300 hover:text-white hover:bg-slate-900 transition" data-i18n="nav_portals">State Portals</a>
+          <a href="checklist.html" class="px-3 py-1.5 rounded-lg text-slate-300 hover:text-white hover:bg-slate-900 transition" data-i18n="nav_kit">72h Kit</a>
+        </nav>
+      </div>
+
+      <!-- Right: Theme & Language Changing Option ONLY (No Logout, No Back) -->
+      <div class="flex items-center gap-2.5 text-xs">
+        <!-- Theme Switcher -->
+        <button onclick="toggleTheme()" class="p-2 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-300 border border-slate-800 transition" title="Toggle Light/Dark Theme">
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/></svg>
+        </button>
+
+        <!-- Bilingual Switcher: English and हिन्दी Only -->
+        <div class="flex items-center gap-1 bg-slate-900 p-0.5 rounded-lg border border-slate-800 text-xs font-bold">
+          <button onclick="setLanguage('en')" id="lang-btn-en" class="px-2 py-0.5 rounded bg-blue-600 text-white transition">EN</button>
+          <button onclick="setLanguage('hi')" id="lang-btn-hi" class="px-2 py-0.5 rounded text-slate-400 hover:text-white transition">हिन्दी</button>
+        </div>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- LEFT NAVIGATION DRAWER -->
+  <div id="raksha-left-drawer-backdrop" onclick="RAKSHA_DRAWER.close()" class="fixed inset-0 bg-slate-950/70 backdrop-blur-sm z-[9998] opacity-0 pointer-events-none transition-opacity duration-300"></div>
+  <aside id="raksha-left-drawer" class="fixed top-0 left-0 w-80 max-w-[85vw] h-full bg-slate-950 text-slate-200 border-r border-slate-800 shadow-2xl z-[9999] -translate-x-full transition-transform duration-300 flex flex-col">
+    <div class="p-4 border-b border-slate-800 flex items-center justify-between bg-slate-900/60">
+      <div class="flex items-center gap-2.5">
+        <img src="assets/images/rakshasetu-logo.jpg" alt="Logo" class="w-8 h-8 rounded-xl object-contain border border-slate-700 bg-slate-900">
+        <div>
+          <div class="font-black text-sm text-white">RakshaSetu Global Navigation</div>
+          <div class="text-[10px] text-slate-400 font-mono">National Disaster Management Geoportal</div>
+        </div>
+      </div>
+      <button onclick="RAKSHA_DRAWER.close()" class="p-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-400 hover:text-white transition" title="Close Drawer">
+        <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div class="p-4 flex-1 overflow-y-auto space-y-1 text-xs">
+      <div class="pb-2 text-[10px] uppercase font-bold text-slate-500 font-mono tracking-wider">Navigation Menu</div>
+      <a href="index.html" class="flex items-center gap-3 px-3 py-2 rounded-xl bg-blue-600 text-white font-bold shadow-md"><span>RakshaSetu Gateway Home</span></a>
+      <a href="about.html" class="flex items-center gap-3 px-3 py-2 rounded-xl hover:bg-slate-900 text-slate-300 hover:text-white transition"><span>About RakshaSetu Architecture</span></a>
+      <a href="radar.html" class="flex items-center gap-3 px-3 py-2 rounded-xl hover:bg-slate-900 text-slate-300 hover:text-white transition"><span>Live Doppler Weather Radar</span></a>
+      <a href="state-portals.html" class="flex items-center gap-3 px-3 py-2 rounded-xl hover:bg-slate-900 text-slate-300 hover:text-white transition"><span>State Disaster Portals (36 SDMAs)</span></a>
+      <a href="safety-info.html" class="flex items-center gap-3 px-3 py-2 rounded-xl hover:bg-slate-900 text-slate-300 hover:text-white transition"><span>Multi-Hazard SOPs & Guides</span></a>
+      <a href="contacts.html" class="flex items-center gap-3 px-3 py-2 rounded-xl hover:bg-slate-900 text-slate-300 hover:text-white transition"><span>National Emergency Contacts (112)</span></a>
+      <a href="checklist.html" class="flex items-center gap-3 px-3 py-2 rounded-xl hover:bg-slate-900 text-slate-300 hover:text-white transition"><span>72-Hour Survival Kit Checklist</span></a>
+      <a href="login.html" class="flex items-center gap-3 px-3 py-2 rounded-xl hover:bg-slate-900 text-slate-300 hover:text-white transition"><span>Unified Authentication Portal</span></a>
+      <a href="government.html" class="flex items-center gap-3 px-3 py-2 rounded-xl hover:bg-slate-900 text-slate-300 hover:text-white transition"><span>🏛️ Government Command Center</span></a>
+      <a href="citizen.html" class="flex items-center gap-3 px-3 py-2 rounded-xl hover:bg-slate-900 text-slate-300 hover:text-white transition"><span>👤 Citizen Safety Portal</span></a>
+      <a href="responder.html" class="flex items-center gap-3 px-3 py-2 rounded-xl hover:bg-slate-900 text-slate-300 hover:text-white transition"><span>🚑 Rescue Tactical Operations</span></a>
+      <a href="admin.html" class="flex items-center gap-3 px-3 py-2 rounded-xl hover:bg-slate-900 text-slate-300 hover:text-white transition"><span>⚙️ Platform Administration</span></a>
+    </div>
+  </aside>
+
+  <!-- HERO SECTION -->
+  <section class="py-12 lg:py-16 px-4 relative overflow-hidden text-center">
+    <div class="max-w-5xl mx-auto space-y-4">
+      
+      <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-100 dark:bg-blue-950 text-blue-800 dark:text-blue-300 border border-blue-200 dark:border-blue-800 text-xs font-mono font-bold tracking-wide shadow-sm">
+        <svg class="w-3.5 h-3.5 text-blue-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+        <span id="state-hero-badge">PAN-INDIA DISASTER PREPAREDNESS & SPATIAL GEO-INTELLIGENCE</span>
+      </div>
+
+      <h1 class="text-4xl sm:text-5xl lg:text-6xl font-black text-slate-900 dark:text-white tracking-tight leading-tight">
+        Raksha<span class="text-blue-600 dark:text-blue-400">Setu</span>
+      </h1>
+      <div class="text-xl sm:text-2xl font-bold bg-gradient-to-r from-blue-600 via-emerald-600 to-cyan-500 bg-clip-text text-transparent" data-i18n="tagline">
+        Prepare. Respond. Protect. Together.
+      </div>
+
+      <p class="text-sm sm:text-base text-slate-600 dark:text-slate-300 max-w-3xl mx-auto font-medium" data-i18n="hero_desc">
+        Unified national disaster management architecture empowering leadership, emergency services, field rescue squads, and citizens across India.
+      </p>
+
+      <!-- Quick Sub-Page Link Bar -->
+      <div class="pt-3 flex flex-wrap items-center justify-center gap-2 text-xs">
+        <a href="missions.html" class="px-3.5 py-1.5 rounded-xl bg-cyan-500/10 border border-cyan-500/30 text-cyan-700 dark:text-cyan-300 font-bold hover:bg-cyan-500/20 transition">Rescue Missions</a>
+        <a href="spatial-map.html" class="px-3.5 py-1.5 rounded-xl bg-blue-500/10 border border-blue-500/30 text-blue-700 dark:text-blue-300 font-bold hover:bg-blue-500/20 transition">GIS Map</a>
+        <a href="incidents.html" class="px-3.5 py-1.5 rounded-xl bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-300 font-semibold hover:bg-slate-300 transition">Incidents</a>
+        <a href="alerts.html" class="px-3.5 py-1.5 rounded-xl bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-300 font-semibold hover:bg-slate-300 transition">Alerts</a>
+        <a href="shelters.html" class="px-3.5 py-1.5 rounded-xl bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-300 font-semibold hover:bg-slate-300 transition">Shelters</a>
+        <a href="resources.html" class="px-3.5 py-1.5 rounded-xl bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-300 font-semibold hover:bg-slate-300 transition">Logistics</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ALL PANELS SECTION -->
+  <section class="max-w-7xl mx-auto px-4 pb-16 flex-1">
+    
+    <div class="text-center space-y-2 mb-8">
+      <h2 class="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white tracking-tight" data-i18n="sec_panels_title">
+        Select your operational panel
+      </h2>
+      <p class="text-sm text-slate-600 dark:text-slate-400 max-w-2xl mx-auto font-medium" data-i18n="sec_panels_sub">
+        Select your role below to access the dedicated operational interface.
+      </p>
+    </div>
+
+    <!-- 5-Grid Columns -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-5">
+      
+      <!-- CARD 0: ⭐ SUPER ADMIN PORTAL (Apex Executive Council) -->
+      <div class="glass-card rounded-3xl p-5 flex flex-col justify-between border-t-4 border-t-amber-500 shadow-lg relative overflow-hidden">
+        <div class="space-y-3">
+          <div class="flex items-center justify-between pb-3 border-b border-slate-200 dark:border-slate-800">
+            <div class="w-11 h-11 rounded-2xl bg-amber-100 dark:bg-amber-950 text-amber-600 dark:text-amber-400 flex items-center justify-center font-bold shadow-md shadow-amber-500/20">
+              <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            </div>
+            <span class="text-[9px] font-mono font-bold bg-amber-100 dark:bg-amber-950 text-amber-700 dark:text-amber-300 px-2 py-0.5 rounded-full border border-amber-300 dark:border-amber-800">APEX COUNCIL</span>
+          </div>
+
+          <h2 class="text-base font-black text-slate-900 dark:text-white leading-tight">⭐ Super Admin</h2>
+          <div class="text-xs font-bold text-amber-600 dark:text-amber-400">Government Higher Officials</div>
+          <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
+            PMO, Union Home Minister, Chief Minister & Chief Secretary apex crisis authorization situation room.
+          </p>
+
+          <ul class="space-y-1 text-xs text-slate-700 dark:text-slate-300 font-medium">
+            <li class="flex items-center gap-1.5"><span class="text-amber-500 font-bold">•</span> Armed Forces Mobilization</li>
+            <li class="flex items-center gap-1.5"><span class="text-amber-500 font-bold">•</span> CWC Gauge Chart & SDRF</li>
+            <li class="flex items-center gap-1.5"><span class="text-amber-500 font-bold">•</span> Cabinet SitRep Generator</li>
+          </ul>
+        </div>
+
+        <div class="mt-5 pt-3 border-t border-slate-200 dark:border-slate-800">
+          <a href="login.html?role=superadmin" class="w-full py-2.5 px-3 rounded-xl bg-amber-600 hover:bg-amber-700 text-white font-bold text-xs text-center transition shadow-lg shadow-amber-600/25 flex items-center justify-center gap-1.5 group">
+            <span data-i18n="btn_signin">Sign In</span>
+            <svg class="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- CARD 1: Government Panel -->
+      <div class="glass-card rounded-3xl p-5 flex flex-col justify-between border-t-4 border-t-blue-600 shadow-md">
+        <div class="space-y-3">
+          <div class="flex items-center justify-between pb-3 border-b border-slate-200 dark:border-slate-800">
+            <div class="w-11 h-11 rounded-2xl bg-blue-100 dark:bg-blue-950 text-blue-600 dark:text-blue-400 flex items-center justify-center font-bold shadow-md shadow-blue-600/20">
+              <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg>
+            </div>
+            <span class="text-[9px] font-mono font-bold bg-blue-50 dark:bg-blue-950/80 text-blue-700 dark:text-blue-300 px-2 py-0.5 rounded-full border border-blue-200 dark:border-blue-800">GOVERNMENT</span>
+          </div>
+
+          <h2 class="text-base font-black text-slate-900 dark:text-white leading-tight">1. Government Panel</h2>
+          <div class="text-xs font-bold text-blue-600 dark:text-blue-400">Command & Control Dashboard</div>
+          <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
+            Macro spatial GIS monitoring, flood inundation modeling, department logistics, and alert broadcasting.
+          </p>
+
+          <ul class="space-y-1 text-xs text-slate-700 dark:text-slate-300 font-medium">
+            <li class="flex items-center gap-1.5"><span class="text-blue-600 font-bold">•</span> Mapbox GL JS Spatial Maps</li>
+            <li class="flex items-center gap-1.5"><span class="text-blue-600 font-bold">•</span> Z-score Anomaly Detector</li>
+            <li class="flex items-center gap-1.5"><span class="text-blue-600 font-bold">•</span> Multi-Department Dispatch</li>
+          </ul>
+        </div>
+
+        <div class="mt-5 pt-3 border-t border-slate-200 dark:border-slate-800">
+          <a href="login.html?role=government" class="w-full py-2.5 px-3 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs text-center transition shadow-lg shadow-blue-600/25 flex items-center justify-center gap-1.5 group">
+            <span data-i18n="btn_signin">Sign In</span>
+            <svg class="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- CARD 2: Citizen Panel -->
+      <div class="glass-card rounded-3xl p-5 flex flex-col justify-between border-t-4 border-t-emerald-600 shadow-md">
+        <div class="space-y-3">
+          <div class="flex items-center justify-between pb-3 border-b border-slate-200 dark:border-slate-800">
+            <div class="w-11 h-11 rounded-2xl bg-emerald-100 dark:bg-emerald-950 text-emerald-600 dark:text-emerald-400 flex items-center justify-center font-bold shadow-md shadow-emerald-600/20">
+              <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            </div>
+            <span class="text-[9px] font-mono font-bold bg-emerald-50 dark:bg-emerald-950/80 text-emerald-700 dark:text-emerald-300 px-2 py-0.5 rounded-full border border-emerald-200 dark:border-emerald-800">CITIZEN</span>
+          </div>
+
+          <h2 class="text-base font-black text-slate-900 dark:text-white leading-tight">2. Citizen Panel</h2>
+          <div class="text-xs font-bold text-emerald-600 dark:text-emerald-400">Stay Informed, Stay Safe</div>
+          <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
+            One-tap 112 emergency SOS, camera incident reports, nearest relief shelters, and multilingual AI assistant.
+          </p>
+
+          <ul class="space-y-1 text-xs text-slate-700 dark:text-slate-300 font-medium">
+            <li class="flex items-center gap-1.5"><span class="text-emerald-600 font-bold">•</span> Working Camera Photo Upload</li>
+            <li class="flex items-center gap-1.5"><span class="text-emerald-600 font-bold">•</span> 112 Priority SOS (&lt;3s)</li>
+            <li class="flex items-center gap-1.5"><span class="text-emerald-600 font-bold">•</span> Relief Shelter Geolocation</li>
+          </ul>
+        </div>
+
+        <div class="mt-5 pt-3 border-t border-slate-200 dark:border-slate-800">
+          <a href="login.html?role=citizen" class="w-full py-2.5 px-3 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs text-center transition shadow-lg shadow-emerald-600/25 flex items-center justify-center gap-1.5 group">
+            <span data-i18n="btn_signin">Sign In</span>
+            <svg class="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- CARD 3: Field Responder Panel -->
+      <div class="glass-card rounded-3xl p-5 flex flex-col justify-between border-t-4 border-t-cyan-600 shadow-md">
+        <div class="space-y-3">
+          <div class="flex items-center justify-between pb-3 border-b border-slate-200 dark:border-slate-800">
+            <div class="w-11 h-11 rounded-2xl bg-cyan-100 dark:bg-cyan-950 text-cyan-600 dark:text-cyan-400 flex items-center justify-center font-bold shadow-md shadow-cyan-600/20">
+              <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m12 14 4-4"/><path d="M3.34 19a10 10 0 1 1 17.32 0"/></svg>
+            </div>
+            <span class="text-[9px] font-mono font-bold bg-cyan-50 dark:bg-cyan-950/80 text-cyan-700 dark:text-cyan-300 px-2 py-0.5 rounded-full border border-cyan-200 dark:border-cyan-800">RESCUE TEAM</span>
+          </div>
+
+          <h2 class="text-base font-black text-slate-900 dark:text-white leading-tight">3. Rescue Team Panel</h2>
+          <div class="text-xs font-bold text-cyan-600 dark:text-cyan-400">Respond & Save Lives</div>
+          <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
+            Tactical HUD for boat squads: mission priority card queues, navigable water channels, and SitRep reports.
+          </p>
+
+          <ul class="space-y-1 text-xs text-slate-700 dark:text-slate-300 font-medium">
+            <li class="flex items-center gap-1.5"><span class="text-cyan-600 font-bold">•</span> Missions in Card Format</li>
+            <li class="flex items-center gap-1.5"><span class="text-cyan-600 font-bold">•</span> Printable SitRep Generator</li>
+            <li class="flex items-center gap-1.5"><span class="text-cyan-600 font-bold">•</span> Safe vs Blocked Route Channels</li>
+          </ul>
+        </div>
+
+        <div class="mt-5 pt-3 border-t border-slate-200 dark:border-slate-800">
+          <a href="login.html?role=responder" class="w-full py-2.5 px-3 rounded-xl bg-cyan-600 hover:bg-cyan-700 text-white font-bold text-xs text-center transition shadow-lg shadow-cyan-600/25 flex items-center justify-center gap-1.5 group">
+            <span data-i18n="btn_signin">Sign In</span>
+            <svg class="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- CARD 4: Admin Panel -->
+      <div class="glass-card rounded-3xl p-5 flex flex-col justify-between border-t-4 border-t-slate-800 shadow-md">
+        <div class="space-y-3">
+          <div class="flex items-center justify-between pb-3 border-b border-slate-200 dark:border-slate-800">
+            <div class="w-11 h-11 rounded-2xl bg-purple-100 dark:bg-purple-950 text-purple-600 dark:text-purple-400 flex items-center justify-center font-bold shadow-md shadow-purple-600/20">
+              <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+            </div>
+            <span class="text-[9px] font-mono font-bold bg-purple-50 dark:bg-purple-950/80 text-purple-700 dark:text-purple-300 px-2 py-0.5 rounded-full border border-purple-200 dark:border-purple-800">PLATFORM ADMIN</span>
+          </div>
+
+          <h2 class="text-base font-black text-slate-900 dark:text-white leading-tight">4. Admin Panel</h2>
+          <div class="text-xs font-bold text-purple-600 dark:text-purple-400">Manage & Optimize System</div>
+          <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
+            Enterprise infrastructure oversight, direct access to citizen/responder operations, and Keycloak RBAC.
+          </p>
+
+          <ul class="space-y-1 text-xs text-slate-700 dark:text-slate-300 font-medium">
+            <li class="flex items-center gap-1.5"><span class="text-purple-600 font-bold">•</span> Direct Citizen & Field Access</li>
+            <li class="flex items-center gap-1.5"><span class="text-purple-600 font-bold">•</span> Keycloak IAM & OAuth2</li>
+            <li class="flex items-center gap-1.5"><span class="text-purple-600 font-bold">•</span> Kafka Immutable Audit Trail</li>
+          </ul>
+        </div>
+
+        <div class="mt-5 pt-3 border-t border-slate-200 dark:border-slate-800">
+          <a href="login.html?role=admin" class="w-full py-2.5 px-3 rounded-xl bg-purple-600 hover:bg-purple-700 text-white font-bold text-xs text-center transition shadow-lg shadow-purple-600/25 flex items-center justify-center gap-1.5 group">
+            <span data-i18n="btn_signin">Sign In</span>
+            <svg class="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </a>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- COMPREHENSIVE PLATFORM WEBPAGES DIRECTORY -->
+    <div class="mt-16 pt-12 border-t border-slate-200 dark:border-slate-800 space-y-8">
+      <div class="text-center space-y-1">
+        <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-blue-100 dark:bg-blue-950 text-blue-700 dark:text-blue-300 font-mono text-xs font-bold">
+          <span>COMPLETE SITE MAP & NAVIGATION DIRECTORY</span>
+        </div>
+        <h2 class="text-xl sm:text-2xl font-black text-slate-900 dark:text-white uppercase tracking-tight">
+          All 5 Command Panels & Dedicated Webpages
+        </h2>
+        <p class="text-xs text-slate-500 max-w-xl mx-auto">Every option in the left navbar of each panel is backed by a fully-developed, dedicated webpage.</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 text-xs">
+        
+        <!-- 1. Super Admin Module -->
+        <div class="p-5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 space-y-3 shadow-sm">
+          <div class="flex items-center justify-between pb-2 border-b border-slate-200 dark:border-slate-800">
+            <div class="flex items-center gap-2 font-bold text-amber-500">
+              <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              <span>1. ⭐ Super Admin Apex Council</span>
+            </div>
+            <a href="login.html?role=superadmin" class="text-[11px] font-bold text-amber-600 hover:underline">Sign In →</a>
+          </div>
+          <div class="space-y-1.5 pl-1">
+            <div><a href="superadmin.html" class="text-amber-600 dark:text-amber-400 font-bold hover:underline">• Apex Council Situation Room</a></div>
+            <div><a href="mobilization.html" class="text-slate-600 dark:text-slate-400 hover:text-white hover:underline">• Tri-Services Mobilization Console</a></div>
+            <div><a href="river-gauges.html" class="text-slate-600 dark:text-slate-400 hover:text-white hover:underline">• CWC River Danger Levels Telemetry</a></div>
+            <div><a href="treasury.html" class="text-slate-600 dark:text-slate-400 hover:text-white hover:underline">• SDRF & NDRF Disaster Treasury Funds</a></div>
+            <div><a href="directives.html" class="text-slate-600 dark:text-slate-400 hover:text-white hover:underline">• Cabinet National Directives Dispatcher</a></div>
+            <div><a href="infrastructure.html" class="text-slate-600 dark:text-slate-400 hover:text-white hover:underline">• Critical Infrastructure Grid</a></div>
+            <div><a href="cabinet-sitrep.html" class="text-slate-600 dark:text-slate-400 hover:text-white hover:underline">• Official Cabinet SitRep Export</a></div>
+            <div><a href="command-hierarchy.html" class="text-slate-600 dark:text-slate-400 hover:text-white hover:underline">• National Command Hierarchy (ICS)</a></div>
+          </div>
+        </div>
+
+        <!-- 2. Government Command Module -->
+        <div class="p-5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 space-y-3 shadow-sm">
+          <div class="flex items-center justify-between pb-2 border-b border-slate-200 dark:border-slate-800">
+            <div class="flex items-center gap-2 font-bold text-blue-500">
+              <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg>
+              <span>2. 🏛️ Government Command</span>
+            </div>
+            <a href="login.html?role=government" class="text-[11px] font-bold text-blue-600 hover:underline">Sign In →</a>
+          </div>
+          <div class="space-y-1.5 pl-1">
+            <div><a href="government.html" class="text-blue-600 dark:text-blue-400 font-bold hover:underline">• Command Dashboard</a></div>
+            <div><a href="incidents.html" class="text-slate-600 dark:text-slate-400 hover:text-white hover:underline">• Incidents Registry (Lifecycle State)</a></div>
+            <div><a href="alerts.html" class="text-slate-600 dark:text-slate-400 hover:text-white hover:underline">• Alerts & Broadcasting (CAP v1.2)</a></div>
+            <div><a href="resources.html" class="text-slate-600 dark:text-slate-400 hover:text-white hover:underline">• Resource Management & Logistics</a></div>
+            <div><a href="shelters.html" class="text-slate-600 dark:text-slate-400 hover:text-white hover:underline">• Relief Shelters & Safe Camps</a></div>
+            <div><a href="departments.html" class="text-slate-600 dark:text-slate-400 hover:text-white hover:underline">• Participating Departments Logistics</a></div>
+            <div><a href="analytics.html" class="text-slate-600 dark:text-slate-400 hover:text-white hover:underline">• Platform & Incident Analytics</a></div>
+            <div><a href="spatial-map.html" class="text-slate-600 dark:text-slate-400 hover:text-white hover:underline">• Fullscreen GIS Inundation Map</a></div>
+            <div><a href="evacuation.html" class="text-slate-600 dark:text-slate-400 hover:text-white hover:underline">• Evacuation Corridors & Convoys</a></div>
+            <div><a href="ai-predictions.html" class="text-slate-600 dark:text-slate-400 hover:text-white hover:underline">• AI Flood Risk & Sensor Anomaly</a></div>
+          </div>
+        </div>
+
+        <!-- 3. Citizen Safety Module -->
+        <div class="p-5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 space-y-3 shadow-sm">
+          <div class="flex items-center justify-between pb-2 border-b border-slate-200 dark:border-slate-800">
+            <div class="flex items-center gap-2 font-bold text-emerald-500">
+              <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+              <span>3. 👤 Citizen Safety App</span>
+            </div>
+            <a href="login.html?role=citizen" class="text-[11px] font-bold text-emerald-600 hover:underline">Sign In →</a>
+          </div>
+          <div class="space-y-1.5 pl-1">
+            <div><a href="citizen.html" class="text-emerald-600 dark:text-emerald-400 font-bold hover:underline">• Citizen Safety Dashboard</a></div>
+            <div><a href="report-incident.html" class="text-slate-600 dark:text-slate-400 hover:text-white hover:underline">• Report Incident (Camera Photo)</a></div>
+            <div><a href="safety-info.html" class="text-slate-600 dark:text-slate-400 hover:text-white hover:underline">• Multi-Hazard Safety Info & Guides</a></div>
+            <div><a href="contacts.html" class="text-slate-600 dark:text-slate-400 hover:text-white hover:underline">• Emergency 112 Speed Dials</a></div>
+            <div><a href="checklist.html" class="text-slate-600 dark:text-slate-400 hover:text-white hover:underline">• 72-Hour Grab-Bag Kit Tracker</a></div>
+            <div><a href="feedback.html" class="text-slate-600 dark:text-slate-400 hover:text-white hover:underline">• Feedback & Volunteer Support</a></div>
+          </div>
+        </div>
+
+        <!-- 4. Rescue Team Module -->
+        <div class="p-5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 space-y-3 shadow-sm">
+          <div class="flex items-center justify-between pb-2 border-b border-slate-200 dark:border-slate-800">
+            <div class="flex items-center gap-2 font-bold text-cyan-500">
+              <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m12 14 4-4"/><path d="M3.34 19a10 10 0 1 1 17.32 0"/></svg>
+              <span>4. 🚑 Rescue Team Tactical HUD</span>
+            </div>
+            <a href="login.html?role=responder" class="text-[11px] font-bold text-cyan-600 hover:underline">Sign In →</a>
+          </div>
+          <div class="space-y-1.5 pl-1">
+            <div><a href="responder.html" class="text-cyan-600 dark:text-cyan-400 font-bold hover:underline">• Tactical Operations HUD</a></div>
+            <div><a href="missions.html" class="text-slate-600 dark:text-slate-400 hover:text-white hover:underline">• Missions Grid (Card Format)</a></div>
+            <div><a href="routes.html" class="text-slate-600 dark:text-slate-400 hover:text-white hover:underline">• Navigable Water Routes & Channels</a></div>
+            <div><a href="teams.html" class="text-slate-600 dark:text-slate-400 hover:text-white hover:underline">• Squads & Boat GPS Telemetry</a></div>
+            <div><a href="comms.html" class="text-slate-600 dark:text-slate-400 hover:text-white hover:underline">• Tactical Radio Mesh (VHF Ch 16)</a></div>
+            <div><a href="sitrep.html" class="text-slate-600 dark:text-slate-400 hover:text-white hover:underline">• Generate Situation Report (SitRep)</a></div>
+          </div>
+        </div>
+
+        <!-- 5. Platform Admin Module -->
+        <div class="p-5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 space-y-3 shadow-sm md:col-span-2 lg:col-span-2">
+          <div class="flex items-center justify-between pb-2 border-b border-slate-200 dark:border-slate-800">
+            <div class="flex items-center gap-2 font-bold text-purple-500">
+              <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+              <span>5. ⚙️ Platform Administration & Architecture</span>
+            </div>
+            <a href="login.html?role=admin" class="text-[11px] font-bold text-purple-600 hover:underline">Sign In →</a>
+          </div>
+          <div class="grid grid-cols-2 sm:grid-cols-3 gap-2 pl-1">
+            <div><a href="admin.html" class="text-purple-600 dark:text-purple-400 font-bold hover:underline">• Platform Admin Console</a></div>
+            <div><a href="users.html" class="text-slate-600 dark:text-slate-400 hover:text-white hover:underline">• User Directory (Keycloak)</a></div>
+            <div><a href="roles.html" class="text-slate-600 dark:text-slate-400 hover:text-white hover:underline">• Role Matrix (RBAC Permissions)</a></div>
+            <div><a href="logs.html" class="text-slate-600 dark:text-slate-400 hover:text-white hover:underline">• System Audit Logs (Kafka Topic)</a></div>
+            <div><a href="content.html" class="text-slate-600 dark:text-slate-400 hover:text-white hover:underline">• Content & Warning Bulletins</a></div>
+            <div><a href="notifications.html" class="text-slate-600 dark:text-slate-400 hover:text-white hover:underline">• Notification Gateway (FCM/CBS)</a></div>
+            <div><a href="integrations.html" class="text-slate-600 dark:text-slate-400 hover:text-white hover:underline">• External API Integrations</a></div>
+            <div><a href="backup.html" class="text-slate-600 dark:text-slate-400 hover:text-white hover:underline">• Backup & Disaster Recovery (DR)</a></div>
+            <div><a href="settings.html" class="text-slate-600 dark:text-slate-400 hover:text-white hover:underline">• System Settings & HA Tuning</a></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="bg-slate-950 text-slate-400 text-xs py-8 px-4 border-t border-slate-800 mt-auto">
+    <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-4">
+      <div class="flex items-center gap-2">
+        <span class="font-bold text-white">RakshaSetu Bhuvan</span>
+        <span>•</span>
+        <span>National Disaster Preparedness & Spatial Crisis Management Platform</span>
+      </div>
+      <div class="font-mono text-[11px] text-slate-500">
+        Assam & Brahmaputra Basin Deployment • National Geoportal Service
+      </div>
+    </div>
+  </footer>
+
+  <!-- TOAST NOTIFICATION CONTAINER -->
+  <div id="toast-notification" class="fixed bottom-5 right-5 z-[2000] translate-y-20 opacity-0 pointer-events-none transition-all duration-300">
+    <div class="bg-slate-900 text-white px-4 py-2.5 rounded-xl shadow-2xl border border-slate-700 flex items-center gap-2.5 text-xs font-medium">
+      <span id="toast-icon">✓</span>
+      <span id="toast-message">Notification</span>
+    </div>
+  </div>
+
+  <!-- RakshaSetu Core Engines -->
+  <script src="js/india-states.js"></script>
+  <script src="js/i18n.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/nav.js"></script>
+  <script>
+    if (window.lucide) lucide.createIcons();
+    function applySavedTheme() {
+      const theme = localStorage.getItem('rakshasetu_theme') || 'light';
+      document.documentElement.className = theme;
+    }
+    function toggleTheme() {
+      const current = document.documentElement.classList.contains('dark') ? 'light' : 'dark';
+      localStorage.setItem('rakshasetu_theme', current);
+      applySavedTheme();
+      showToast(current === 'dark' ? 'Dark Theme Activated' : 'Light Theme Activated');
+    }
+    applySavedTheme();
+
+    // TOAST NOTIFICATION UTILITY
+    function showToast(msg, icon = '✓') {
+      const toast = document.getElementById('toast-notification');
+      if (!toast) return;
+      document.getElementById('toast-message').textContent = msg;
+      document.getElementById('toast-icon').textContent = icon;
+      toast.classList.remove('translate-y-20', 'opacity-0', 'pointer-events-none');
+      setTimeout(() => {
+        toast.classList.add('translate-y-20', 'opacity-0', 'pointer-events-none');
+      }, 3000);
+    }
+
+    // STATE CHANGE HANDLER
+    function updateSelectedState(stateId) {
+      if (!window.RAKSHA_STATES) return;
+      const state = RAKSHA_STATES.get(stateId);
+      if (!state) return;
+      
+      const badge = document.getElementById('state-hero-badge');
+      if (badge) {
+        badge.textContent = state.name.toUpperCase() + ' — ' + state.risk.toUpperCase() + ' RISK (' + state.rainfall + '/24h • ' + state.ndrf + ' NDRF)';
+      }
+      showToast(`Location set to: ${state.name.toUpperCase()}`);
+    }
+
+    window.populateCurrentStateDropdown = function() {
+      const select = document.getElementById('state-selector');
+      if (select && window.RAKSHA_STATES) {
+        const val = select.value || 'assam';
+        RAKSHA_STATES.populate(select, val);
+      }
+    };
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const select = document.getElementById('state-selector');
+      if (select && window.RAKSHA_STATES) {
+        RAKSHA_STATES.populate(select, 'assam');
+        updateSelectedState('assam');
+      }
+    });
+    // SELF-CONTAINED LANGUAGE ENGINE
+    // The page can now switch English/Hindi even when js/i18n.js is unavailable.
+    const RAKSHA_PAGE_I18N = {
+      en: {
+        tagline: 'Prepare. Respond. Protect. Together.',
+        hero_desc: 'Unified national disaster management architecture empowering leadership, emergency services, field rescue squads, and citizens across India.',
+        nav_home: 'Home', nav_about: 'About', nav_contacts: 'Contacts', nav_sops: 'SOPs',
+        nav_radar: 'Radar', nav_portals: 'State Portals', nav_kit: '72h Kit',
+        sec_panels_title: 'Select your operational panel',
+        sec_panels_sub: 'Select your role below to access the dedicated operational interface.',
+        btn_signin: 'Sign In'
+      },
+      hi: {
+        tagline: 'तैयार रहें। प्रतिक्रिया दें। सुरक्षा करें। साथ मिलकर।',
+        hero_desc: 'भारत भर में नेतृत्व, आपातकालीन सेवाओं, फील्ड बचाव दलों और नागरिकों को सशक्त बनाने वाला एकीकृत राष्ट्रीय आपदा प्रबंधन ढांचा।',
+        nav_home: 'होम', nav_about: 'परिचय', nav_contacts: 'संपर्क', nav_sops: 'एसओपी',
+        nav_radar: 'रडार', nav_portals: 'राज्य पोर्टल', nav_kit: '72 घंटे किट',
+        sec_panels_title: 'अपना संचालन पैनल चुनें',
+        sec_panels_sub: 'समर्पित संचालन इंटरफेस तक पहुंचने के लिए नीचे अपनी भूमिका चुनें।',
+        btn_signin: 'साइन इन'
+      }
+    };
+
+    function applyRakshaLanguage(lang, notify = true) {
+      const selected = lang === 'hi' ? 'hi' : 'en';
+      const dict = RAKSHA_PAGE_I18N[selected];
+
+      document.documentElement.lang = selected;
+      document.querySelectorAll('[data-i18n]').forEach((el) => {
+        const key = el.getAttribute('data-i18n');
+        if (Object.prototype.hasOwnProperty.call(dict, key)) el.textContent = dict[key];
+      });
+
+      applyRakshaDrawerLanguage(selected);
+
+      // Keep both likely storage keys in sync so the language survives refresh.
+      localStorage.setItem('rakshasetu_language', selected);
+      localStorage.setItem('raksha_language', selected);
+
+      const topEn = document.getElementById('lang-btn-en');
+      const topHi = document.getElementById('lang-btn-hi');
+      if (topEn && topHi) {
+        topEn.className = selected === 'en'
+          ? 'px-2 py-0.5 rounded bg-blue-600 text-white transition'
+          : 'px-2 py-0.5 rounded text-slate-400 hover:text-white transition';
+        topHi.className = selected === 'hi'
+          ? 'px-2 py-0.5 rounded bg-blue-600 text-white transition'
+          : 'px-2 py-0.5 rounded text-slate-400 hover:text-white transition';
+      }
+
+      if (notify && typeof showToast === 'function') {
+        showToast(selected === 'hi' ? 'भाषा हिंदी में बदल दी गई' : 'Language changed to English', '✓');
+      }
+    }
+
+    // Override/wrap any external setLanguage() safely. This guarantees the buttons work
+    // whether js/i18n.js is present, missing, or uses a different storage key.
+    const externalSetLanguage = (typeof window.setLanguage === 'function') ? window.setLanguage : null;
+    window.setLanguage = function(lang) {
+      const selected = lang === 'hi' ? 'hi' : 'en';
+      try {
+        if (externalSetLanguage && externalSetLanguage !== window.setLanguage) {
+          externalSetLanguage(selected);
+        }
+      } catch (error) {
+        console.warn('External i18n engine unavailable; using built-in translations.', error);
+      }
+      applyRakshaLanguage(selected, true);
+    };
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const savedLanguage = localStorage.getItem('rakshasetu_language') || localStorage.getItem('raksha_language') || 'en';
+      applyRakshaLanguage(savedLanguage, false);
+    });
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const select = document.getElementById('state-selector');
+      if (select && window.RAKSHA_STATES) {
+        RAKSHA_STATES.populate(select, 'assam');
+        updateSelectedState('assam');
+      }
+    });
+  </script>
+</body>
+</html>

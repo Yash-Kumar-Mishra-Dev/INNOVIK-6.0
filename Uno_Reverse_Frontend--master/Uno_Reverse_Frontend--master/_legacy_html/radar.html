@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en" class="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RakshaSetu — IMD Doppler Weather Radar & Satellite Storm Tracker</title>
+  <meta name="description" content="Live Pan-India IMD Doppler weather radar, INSAT-3D thermal cloud satellite telemetry, and precipitation anomaly tracking across all 36 States and UTs.">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  
+  <!-- Leaflet GIS Engine -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace'],
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-slate-50 dark:bg-[#060b18] text-slate-900 dark:text-slate-100 font-sans min-h-screen flex flex-col antialiased selection:bg-blue-600 selection:text-white transition-colors duration-300">
+
+  <!-- BHUVAN TRICOLOR STRIPE -->
+  <div class="bg-gradient-to-r from-[#ff9933] via-white to-[#138808] h-1.5 w-full"></div>
+
+  <!-- UNIFIED CONNECTED NAV BAR -->
+  <header class="bg-slate-950 text-white px-4 lg:px-8 py-3.5 shadow-lg border-b border-slate-800 sticky top-0 z-50">
+    <div class="max-w-[1720px] mx-auto flex items-center justify-between gap-4">
+      
+      <!-- Left: Back Button first, then Logo with Name & Caption -->
+      <div class="flex items-center gap-3">
+        <!-- Back to Gateway -->
+        <a href="index.html" class="px-3 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 transition font-semibold flex items-center gap-1.5 text-xs shadow-sm" title="Redirect to Gateway Index">
+          <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m15 18-6-6 6-6"/></svg>
+          <span data-i18n="nav_back">Back</span>
+        </a>
+
+        <!-- Logo & Official Caption Aligned on Left After Back Button -->
+        <a href="index.html" class="flex items-center gap-3 group text-left" title="RakshaSetu Gateway">
+          <img src="assets/images/rakshasetu-logo.jpg" alt="RakshaSetu Logo" class="w-10 h-10 rounded-2xl object-contain border border-slate-700 shadow-md group-hover:scale-105 transition-transform bg-slate-900 p-0.5" onerror="this.src='logo.png'">
+          <div>
+            <div class="font-black text-lg tracking-tight text-white flex items-center gap-1.5">
+              Raksha<span class="text-blue-500">Setu</span>
+              <span class="text-[9px] px-1.5 py-0.2 rounded bg-blue-500/20 text-blue-300 font-mono font-bold border border-blue-500/30">DOPPLER RADAR</span>
+            </div>
+            <div class="text-[10px] font-bold text-slate-400 tracking-wide" data-i18n="tagline">Prepare. Respond. Protect. Together.</div>
+          </div>
+        </a>
+      </div>
+
+      <!-- Right: Home & All Options at the Last + Theme Toggle -->
+      <div class="flex items-center gap-2">
+        <nav class="flex items-center gap-1 text-xs font-semibold overflow-x-auto">
+          <a href="index.html" class="px-3 py-1.5 rounded-lg text-slate-300 hover:text-white hover:bg-slate-900 transition flex items-center gap-1.5">
+            <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
+            <span data-i18n="nav_home">Home</span>
+          </a>
+          <a href="about.html" class="px-3 py-1.5 rounded-lg text-slate-300 hover:text-white hover:bg-slate-900 transition" data-i18n="nav_about">About</a>
+          <a href="contacts.html" class="px-3 py-1.5 rounded-lg text-slate-300 hover:text-white hover:bg-slate-900 transition" data-i18n="nav_contacts">Contacts</a>
+          <a href="safety-info.html" class="px-3 py-1.5 rounded-lg text-slate-300 hover:text-white hover:bg-slate-900 transition" data-i18n="nav_sops">SOPs</a>
+          <a href="radar.html" class="px-3 py-1.5 rounded-lg text-white bg-blue-600 font-bold shadow-sm transition" data-i18n="nav_radar">Radar</a>
+          <a href="state-portals.html" class="px-3 py-1.5 rounded-lg text-slate-300 hover:text-white hover:bg-slate-900 transition" data-i18n="nav_portals">State Portals</a>
+          <a href="checklist.html" class="px-3 py-1.5 rounded-lg text-slate-300 hover:text-white hover:bg-slate-900 transition" data-i18n="nav_kit">72h Kit</a>
+        </nav>
+
+        <!-- Theme Switcher -->
+        <button onclick="toggleTheme()" class="p-2 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-300 border border-slate-800 transition text-xs" title="Toggle Light/Dark Theme">
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/></svg>
+        </button>
+      </div>
+
+    </div>
+  </header>
+
+  
+
+
+
+  
+  <!-- MAIN RADAR WORKSPACE -->
+  <main class="max-w-[1720px] mx-auto p-4 lg:p-6 flex-1 flex flex-col space-y-4">
+    
+    <!-- SUB-BAR WITH STATE SELECTOR -->
+    <div class="p-4 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm flex flex-wrap items-center justify-between gap-4">
+      <div>
+        <h1 class="text-lg font-black text-slate-900 dark:text-white flex items-center gap-2">
+          <span>Live Doppler Radar & Satellite Cloud Telemetry</span>
+          <span class="px-2 py-0.5 rounded bg-cyan-500/20 text-cyan-500 text-[10px] font-mono font-bold animate-pulse">● LIVE SATELLITE FEED</span>
+        </h1>
+        <p class="text-xs text-slate-500">Select any of India's 28 States or 8 Union Territories to immediately center radar observations.</p>
+      </div>
+
+      <!-- 36 States Interactive Dropdown -->
+      <div class="flex items-center gap-3">
+        <label class="text-xs font-bold text-slate-700 dark:text-slate-300">Select Indian State / UT:</label>
+        <select id="radar-state-select" onchange="onRadarStateChange()" class="px-4 py-2 rounded-xl bg-slate-100 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-xs font-semibold focus:ring-2 focus:ring-cyan-500 outline-none">
+          <!-- Populated dynamically by js/india-states.js -->
+        </select>
+      </div>
+    </div>
+
+    <!-- 4 RADAR KPIS -->
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+      <div class="p-3.5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 space-y-1">
+        <div class="text-[10px] uppercase font-mono font-bold text-slate-400">Current Station</div>
+        <div id="radar-station-name" class="font-bold text-sm text-cyan-600 dark:text-cyan-400">Assam (Guwahati)</div>
+        <div class="text-[11px] text-slate-500 font-mono">Doppler S-Band 2.8 GHz</div>
+      </div>
+      <div class="p-3.5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 space-y-1">
+        <div class="text-[10px] uppercase font-mono font-bold text-slate-400">Precipitation Rate</div>
+        <div id="radar-rainfall" class="font-bold text-sm text-slate-900 dark:text-white font-mono">184 mm / 24h</div>
+        <div class="text-[11px] text-red-500 font-bold">● High Inundation Risk</div>
+      </div>
+      <div class="p-3.5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 space-y-1">
+        <div class="text-[10px] uppercase font-mono font-bold text-slate-400">Primary River Basin</div>
+        <div id="radar-river" class="font-bold text-sm text-slate-900 dark:text-white font-mono">Brahmaputra / Barak</div>
+        <div class="text-[11px] text-amber-500 font-bold">Above Danger Mark +0.82m</div>
+      </div>
+      <div class="p-3.5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 space-y-1">
+        <div class="text-[10px] uppercase font-mono font-bold text-slate-400">NDRF Readiness</div>
+        <div id="radar-ndrf" class="font-bold text-sm text-emerald-600 dark:text-emerald-400 font-mono">5 Battalions Active</div>
+        <div class="text-[11px] text-slate-500 font-mono">Helpline: <b id="radar-helpline" class="text-slate-700 dark:text-slate-300">1079</b></div>
+      </div>
+    </div>
+
+    <!-- MAP CANVAS -->
+    <div class="flex-1 min-h-[500px] rounded-2xl overflow-hidden border border-slate-200 dark:border-slate-800 relative shadow-inner">
+      <div id="radar-map" class="w-full h-full min-h-[500px]"></div>
+      
+      <!-- RADAR OVERLAY LEGEND -->
+      <div class="absolute bottom-4 left-4 z-[1000] bg-slate-950/90 backdrop-blur-md p-3 rounded-xl border border-slate-800 text-[11px] font-mono text-white shadow-xl space-y-1">
+        <div class="font-bold text-slate-300 text-xs">Radar Reflectivity (dBZ)</div>
+        <div class="flex items-center gap-1">
+          <span class="w-4 h-3 bg-blue-500 rounded-sm"></span> 10-20 (Light)
+          <span class="w-4 h-3 bg-green-500 rounded-sm ml-2"></span> 20-35 (Moderate)
+          <span class="w-4 h-3 bg-yellow-500 rounded-sm ml-2"></span> 35-50 (Heavy)
+          <span class="w-4 h-3 bg-red-600 rounded-sm ml-2"></span> 50+ (Severe Cloudburst)
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- RakshaSetu Core Engines -->
+  <script src="js/india-states.js"></script>
+  <script src="js/i18n.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/nav.js"></script>
+  <script>
+    if (window.lucide) lucide.createIcons();
+    
+    function applySavedTheme() {
+      const theme = localStorage.getItem('rakshasetu_theme') || 'light';
+      document.documentElement.className = theme;
+    }
+    function toggleTheme() {
+      const current = document.documentElement.classList.contains('dark') ? 'light' : 'dark';
+      localStorage.setItem('rakshasetu_theme', current);
+      applySavedTheme();
+    }
+    applySavedTheme();
+
+    // Initialize Radar Map
+    let radarMap, radarMarker;
+    function initRadarMap() {
+      radarMap = L.map('radar-map', {
+        zoomControl: true
+      }).setView([26.2006, 92.9376], 7);
+
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 18,
+        attribution: '© OpenStreetMap contributors | ISRO Bhuvan | IMD Radar'
+      }).addTo(radarMap);
+
+      // Pulse Radar Beacon Marker
+      radarMarker = L.circleMarker([26.2006, 92.9376], {
+        radius: 12,
+        color: '#06b6d4',
+        fillColor: '#22d3ee',
+        fillOpacity: 0.85,
+        weight: 3
+      }).addTo(radarMap);
+
+      // Populate States Dropdown
+      const select = document.getElementById('radar-state-select');
+      if (window.RAKSHA_STATES) {
+        RAKSHA_STATES.populate(select, 'assam');
+      }
+    }
+
+    function onRadarStateChange() {
+      const select = document.getElementById('radar-state-select');
+      const stateId = select.value;
+      const state = RAKSHA_STATES.get(stateId);
+      if (!state) return;
+
+      // Update KPIs
+      document.getElementById('radar-station-name').textContent = state.name + ' (' + state.capital + ')';
+      document.getElementById('radar-rainfall').textContent = state.rainfall + ' / 24h';
+      document.getElementById('radar-river').textContent = state.river;
+      document.getElementById('radar-ndrf').textContent = state.ndrf + ' Active';
+      document.getElementById('radar-helpline').textContent = state.helpline;
+
+      // Pan & Zoom Map
+      RAKSHA_STATES.bindMap(radarMap, state, radarMarker);
+    }
+
+    window.populateCurrentStateDropdown = function() {
+      const select = document.getElementById('radar-state-select');
+      if (select && window.RAKSHA_STATES) {
+        const val = select.value || 'assam';
+        RAKSHA_STATES.populate(select, val);
+      }
+    };
+
+    document.addEventListener('DOMContentLoaded', () => {
+      initRadarMap();
+    });
+  </script>
+</body>
+</html>

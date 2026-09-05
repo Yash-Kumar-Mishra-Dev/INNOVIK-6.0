@@ -1,0 +1,3 @@
+threshold,value,source
+95_percentile,0.2635244131088257,2018-2022 training reconstruction errors
+99_percentile,0.4121681749820709,2018-2022 training reconstruction errors

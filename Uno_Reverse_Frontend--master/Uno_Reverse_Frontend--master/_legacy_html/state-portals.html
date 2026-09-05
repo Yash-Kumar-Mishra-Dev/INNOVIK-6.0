@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en" class="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RakshaSetu — Pan-India 28 States & 8 UTs Disaster Management Directory</title>
+  <meta name="description" content="Official directory and 24x7 emergency response matrix for all 28 State Disaster Management Authorities (SDMAs) and 8 Union Territory Emergency Control Rooms.">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace'],
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-slate-50 dark:bg-[#060b18] text-slate-900 dark:text-slate-100 font-sans min-h-screen flex flex-col antialiased selection:bg-blue-600 selection:text-white transition-colors duration-300">
+
+  <!-- BHUVAN TRICOLOR STRIPE -->
+  <div class="bg-gradient-to-r from-[#ff9933] via-white to-[#138808] h-1.5 w-full"></div>
+
+  <!-- UNIFIED CONNECTED NAV BAR -->
+  <header class="bg-slate-950 text-white px-4 lg:px-8 py-3.5 shadow-lg border-b border-slate-800 sticky top-0 z-50">
+    <div class="max-w-[1720px] mx-auto flex items-center justify-between gap-4">
+      
+      <!-- Left: Back Button first, then Logo with Name & Caption -->
+      <div class="flex items-center gap-3">
+        <!-- Back to Gateway -->
+        <a href="index.html" class="px-3 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 transition font-semibold flex items-center gap-1.5 text-xs shadow-sm" title="Redirect to Gateway Index">
+          <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m15 18-6-6 6-6"/></svg>
+          <span data-i18n="nav_back">Back</span>
+        </a>
+
+        <!-- Logo & Official Caption Aligned on Left After Back Button -->
+        <a href="index.html" class="flex items-center gap-3 group text-left" title="RakshaSetu Gateway">
+          <img src="assets/images/rakshasetu-logo.jpg" alt="RakshaSetu Logo" class="w-10 h-10 rounded-2xl object-contain border border-slate-700 shadow-md group-hover:scale-105 transition-transform bg-slate-900 p-0.5" onerror="this.src='logo.png'">
+          <div>
+            <div class="font-black text-lg tracking-tight text-white flex items-center gap-1.5">
+              Raksha<span class="text-blue-500">Setu</span>
+              <span class="text-[9px] px-1.5 py-0.2 rounded bg-blue-500/20 text-blue-300 font-mono font-bold border border-blue-500/30">STATE PORTALS</span>
+            </div>
+            <div class="text-[10px] font-bold text-slate-400 tracking-wide" data-i18n="tagline">Prepare. Respond. Protect. Together.</div>
+          </div>
+        </a>
+      </div>
+
+      <!-- Right: Home & All Options at the Last + Theme Toggle -->
+      <div class="flex items-center gap-2">
+        <nav class="flex items-center gap-1 text-xs font-semibold overflow-x-auto">
+          <a href="index.html" class="px-3 py-1.5 rounded-lg text-slate-300 hover:text-white hover:bg-slate-900 transition flex items-center gap-1.5">
+            <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
+            <span data-i18n="nav_home">Home</span>
+          </a>
+          <a href="about.html" class="px-3 py-1.5 rounded-lg text-slate-300 hover:text-white hover:bg-slate-900 transition" data-i18n="nav_about">About</a>
+          <a href="contacts.html" class="px-3 py-1.5 rounded-lg text-slate-300 hover:text-white hover:bg-slate-900 transition" data-i18n="nav_contacts">Contacts</a>
+          <a href="safety-info.html" class="px-3 py-1.5 rounded-lg text-slate-300 hover:text-white hover:bg-slate-900 transition" data-i18n="nav_sops">SOPs</a>
+          <a href="radar.html" class="px-3 py-1.5 rounded-lg text-slate-300 hover:text-white hover:bg-slate-900 transition" data-i18n="nav_radar">Radar</a>
+          <a href="state-portals.html" class="px-3 py-1.5 rounded-lg text-white bg-blue-600 font-bold shadow-sm transition" data-i18n="nav_portals">State Portals</a>
+          <a href="checklist.html" class="px-3 py-1.5 rounded-lg text-slate-300 hover:text-white hover:bg-slate-900 transition" data-i18n="nav_kit">72h Kit</a>
+        </nav>
+
+        <!-- Theme Switcher -->
+        <button onclick="toggleTheme()" class="p-2 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-300 border border-slate-800 transition text-xs" title="Toggle Light/Dark Theme">
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/></svg>
+        </button>
+      </div>
+
+    </div>
+  </header>
+
+  
+
+
+
+  
+  <!-- MAIN WORKSPACE -->
+  <main class="max-w-[1720px] mx-auto p-4 lg:p-6 flex-1 space-y-6">
+    
+    <!-- HEADER & SEARCH BAR -->
+    <div class="p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm flex flex-wrap items-center justify-between gap-4">
+      <div>
+        <h1 class="text-xl font-black text-slate-900 dark:text-white tracking-tight flex items-center gap-2">
+          <span>Pan-India 28 States & 8 Union Territories SDMA Directory</span>
+          <span class="px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-500 text-[10px] font-mono font-bold">36 SDMAs ACTIVE</span>
+        </h1>
+        <p class="text-xs text-slate-500">Official State Disaster Management Authorities directory with 24x7 control room hotlines, active danger ratings, and telemetry.</p>
+      </div>
+
+      <!-- Filters & Search -->
+      <div class="flex flex-wrap items-center gap-3 w-full lg:w-auto">
+        <div class="relative w-full sm:w-64">
+          <svg class="w-4 h-4 absolute left-3 top-2.5 text-slate-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          <input type="text" id="state-search-input" oninput="filterStatesGrid()" placeholder="Search state, capital, river..." class="w-full pl-9 pr-3 py-2 rounded-xl bg-slate-100 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-xs focus:ring-2 focus:ring-emerald-500 outline-none">
+        </div>
+        <div class="flex items-center gap-1.5 overflow-x-auto text-xs">
+          <button onclick="setRiskFilter('all')" id="rf-all" class="px-3 py-1.5 rounded-lg bg-emerald-600 text-white font-bold">All (36)</button>
+          <button onclick="setRiskFilter('Severe')" id="rf-severe" class="px-3 py-1.5 rounded-lg bg-slate-100 dark:bg-slate-800 hover:bg-red-600 hover:text-white text-slate-700 dark:text-slate-300 font-semibold border border-slate-300 dark:border-slate-700">Severe (4)</button>
+          <button onclick="setRiskFilter('High')" id="rf-high" class="px-3 py-1.5 rounded-lg bg-slate-100 dark:bg-slate-800 hover:bg-amber-500 hover:text-white text-slate-700 dark:text-slate-300 font-semibold border border-slate-300 dark:border-slate-700">High (12)</button>
+          <button onclick="setRiskFilter('Moderate')" id="rf-moderate" class="px-3 py-1.5 rounded-lg bg-slate-100 dark:bg-slate-800 hover:bg-blue-600 hover:text-white text-slate-700 dark:text-slate-300 font-semibold border border-slate-300 dark:border-slate-700">Moderate (15)</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- STATES GRID -->
+    <div id="states-card-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+      <!-- Generated dynamically by script below -->
+    </div>
+
+  </main>
+
+  <!-- RakshaSetu Core Engines -->
+  <script src="js/india-states.js"></script>
+  <script src="js/i18n.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/nav.js"></script>
+  <script>
+    if (window.lucide) lucide.createIcons();
+
+    function applySavedTheme() {
+      const theme = localStorage.getItem('rakshasetu_theme') || 'light';
+      document.documentElement.className = theme;
+    }
+    function toggleTheme() {
+      const current = document.documentElement.classList.contains('dark') ? 'light' : 'dark';
+      localStorage.setItem('rakshasetu_theme', current);
+      applySavedTheme();
+    }
+    applySavedTheme();
+
+    let activeRiskFilter = 'all';
+
+    function setRiskFilter(risk) {
+      activeRiskFilter = risk;
+      document.querySelectorAll('[id^="rf-"]').forEach(btn => {
+        btn.className = "px-3 py-1.5 rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 font-semibold border border-slate-300 dark:border-slate-700";
+      });
+      const activeBtn = document.getElementById('rf-' + risk.toLowerCase());
+      if (activeBtn) {
+        activeBtn.className = "px-3 py-1.5 rounded-lg bg-emerald-600 text-white font-bold shadow-md";
+      }
+      filterStatesGrid();
+    }
+
+    function renderStatesGrid(items) {
+      const grid = document.getElementById('states-card-grid');
+      grid.innerHTML = '';
+      const currentLang = localStorage.getItem('rakshasetu_lang') || 'en';
+
+      items.forEach(s => {
+        const riskColor = s.risk === 'Severe' ? 'bg-red-500/15 text-red-500 border-red-500/30' : (s.risk === 'High' ? 'bg-amber-500/15 text-amber-500 border-amber-500/30' : (s.risk === 'Moderate' ? 'bg-blue-500/15 text-blue-500 border-blue-500/30' : 'bg-emerald-500/15 text-emerald-500 border-emerald-500/30'));
+        
+        const card = document.createElement('div');
+        card.className = "p-5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm hover:shadow-md transition-all flex flex-col justify-between space-y-4";
+        card.innerHTML = `
+          <div class="space-y-2">
+            <div class="flex items-start justify-between gap-2">
+              <div>
+                <h3 class="font-black text-sm text-slate-900 dark:text-white">${currentLang === 'hi' ? s.name_hi : s.name}</h3>
+                <div class="text-[11px] text-slate-500 font-mono">Capital: <span class="text-slate-700 dark:text-slate-300 font-semibold">${s.capital}</span></div>
+              </div>
+              <span class="px-2 py-0.5 rounded-md text-[10px] font-mono font-bold border ${riskColor}">${s.risk}</span>
+            </div>
+
+            <div class="text-xs space-y-1 pt-2 border-t border-slate-100 dark:border-slate-800 text-slate-600 dark:text-slate-400 font-mono text-[11px]">
+              <div>Rainfall (24h): <b class="text-slate-900 dark:text-white">${s.rainfall}</b></div>
+              <div>River Basin: <b class="text-slate-900 dark:text-white">${s.river}</b></div>
+              <div>NDRF Deployment: <b class="text-emerald-600 dark:text-emerald-400">${s.ndrf}</b></div>
+            </div>
+          </div>
+
+          <div class="pt-3 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between gap-2 text-xs">
+            <a href="tel:${s.helpline}" class="px-3 py-1.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold flex items-center gap-1.5 transition shadow-sm">
+              <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+              <span>Call ${s.helpline}</span>
+            </a>
+            <a href="radar.html" class="px-3 py-1.5 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 font-semibold transition flex items-center gap-1">
+              <span>Radar</span>
+              <svg class="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+            </a>
+          </div>
+        `;
+        grid.appendChild(card);
+      });
+    }
+
+    function filterStatesGrid() {
+      const q = (document.getElementById('state-search-input').value || '').toLowerCase().trim();
+      let list = window.RAKSHA_STATES ? window.RAKSHA_STATES.list : [];
+      
+      if (activeRiskFilter !== 'all') {
+        list = list.filter(s => s.risk.toLowerCase() === activeRiskFilter.toLowerCase());
+      }
+      if (q) {
+        list = list.filter(s => s.name.toLowerCase().includes(q) || s.name_hi.includes(q) || s.capital.toLowerCase().includes(q) || s.river.toLowerCase().includes(q));
+      }
+      renderStatesGrid(list);
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      filterStatesGrid();
+    });
+  </script>
+</body>
+</html>
